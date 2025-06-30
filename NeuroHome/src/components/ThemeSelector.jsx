@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 
-const ThemeSelector = () => {
+const ThemeSelector = ({ num }) => {
   const { theme, setTheme, availableThemes } = useContext(ThemeContext);
 
   return (

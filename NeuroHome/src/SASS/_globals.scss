@@ -5,3 +5,151 @@ body {
 html {
   scroll-behavior: auto !important;
 }
+
+.bg-secondary {
+  background-color: var(--accent-color-2) !important;
+}
+
+.bg-card {
+  background-color: var(--card-bg) !important;
+}
+
+.bg-accent {
+  background-color: var(--accent-color) !important;
+}
+
+h1 {
+  font-size: var(--fs-xxl);
+  font-family: "Space Grotesk", sans-serif;
+}
+h2 {
+  font-size: var(--fs-xl);
+  font-family: "Space Grotesk", sans-serif;
+}
+h3 {
+  font-size: var(--fs-lg);
+  font-family: "Space Grotesk", sans-serif;
+}
+h4 {
+  font-size: var(--fs-md);
+  font-family: "Space Grotesk", sans-serif;
+}
+h5 {
+  font-size: var(--fs-base);
+  font-family: "Space Grotesk", sans-serif;
+}
+h6 {
+  font-size: var(--fs-sm);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+p,
+span,
+a,
+li {
+  font-size: var(--fs-sm);
+}
+
+a {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+select {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+body {
+  color: var(--text-color);
+  font-size: var(--fs-base);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.text-primary {
+  color: var(--text-color-accent) !important;
+}
+.text-secondary {
+  color: var(--text-color-2) !important;
+}
+.text-accent {
+  color: var(--accent-color) !important;
+}
+.text-muted {
+  color: var(--text-color) !important;
+}
+.text-full {
+  color: var(--contrast-full) !important;
+}
+.text-zero {
+  color: var(--contrast-zero) !important;
+}
+
+.border {
+  border-color: var(--border-color);
+}
+
+svg {
+  color: var(--text-color-accent) !important;
+}
+
+.fs-1 {
+  font-size: var(--fs-xxl);
+}
+.fs-2 {
+  font-size: var(--fs-xl);
+}
+.fs-3 {
+  font-size: var(--fs-lg);
+}
+.fs-4 {
+  font-size: var(--fs-md);
+}
+.fs-5 {
+  font-size: var(--fs-sm);
+}
+.fs-6 {
+  font-size: var(--fs-xs);
+}
+.fs-7 {
+  font-size: 13px !important;
+}
+
+* {
+  outline: none !important;
+  box-shadow: none !important;
+
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  &:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  font-weight: 500 !important;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-color-accent) !important;
+}
