@@ -1,40 +1,77 @@
-import React from "react";
-import { FiCloud, FiZap, FiShield, FiCpu, FiBell, FiRepeat } from "react-icons/fi";
+// src/pages/Bedroom.jsx
 
-const items = [
-  {
-    title: "Cloud Sync",
-    icon: <FiCloud />,
-    description: "Sync your files across the cloud seamlessly.",
-  },
-  {
-    title: "Power Boost",
-    icon: <FiZap />,
-    description: "Experience high performance power modes.",
-  },
-  { title: "Security", icon: <FiShield />, description: "Industry-leading encryption built-in." },
-  { title: "Processor", icon: <FiCpu />, description: "Next-gen processing capabilities." },
-  { title: "Notifications", icon: <FiBell />, description: "Stay updated in real time." },
-  { title: "Automate", icon: <FiRepeat />, description: "Automate workflows with ease." },
-];
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
+import { useState } from "react";
+import { BedDouble, Lamp, ThermometerSun } from "lucide-react";
+import { cn } from "@/lib/utils"; // if you're using classnames utility like Tailwind's `cn`
 
-const BentoGrid = () => {
+const Bedroom = () => {
+  const [lampOn, setLampOn] = useState(true);
+  const [acOn, setAcOn] = useState(false);
+
   return (
-    <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-10 max-w-6xl mx-auto">
-      <div className="grid grid-cols-3 md:grid-cols-3 gap-6">
-        {items.map((item, idx) => (
-          <div
-            key={idx}
-            className="bg-black/30 text-white rounded-2xl p-6 shadow-md hover:scale-[1.02] transition-all duration-300"
-          >
-            <div className="text-3xl mb-4 text-accent">{item.icon}</div>
-            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-            <p className="text-sm text-gray-300">{item.description}</p>
-          </div>
-        ))}
+    <div className="min-h-screen px-6 py-10 bg-secondary text-white">
+      <h1 className="text-3xl font-bold mb-8 text-center text-primary">Bedroom Dashboard</h1>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {/* Lamp Control */}
+        <Card className="bg-primary border border-neutral-700 shadow-md">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-primary">
+              <Lamp className="w-5 h-5 text-yellow-400" />
+              Bedside Lamp
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex justify-between items-center">
+            <span className={cn("text-sm", lampOn ? "text-primary" : "text-muted")}>
+              {lampOn ? "On" : "Off"}
+            </span>
+            <Switch
+              checked={lampOn}
+              onCheckedChange={setLampOn}
+              className="data-[state=checked]:bg-yellow-500"
+            />
+          </CardContent>
+        </Card>
+
+        {/* AC Control */}
+        <Card className="bg-neutral-900 border border-neutral-700 shadow-md">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <ThermometerSun className="w-5 h-5 text-cyan-400" />
+              Air Conditioner
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex justify-between items-center">
+            <span className={cn("text-sm", acOn ? "text-primary" : "text-muted")}>
+              {acOn ? "Cooling" : "Off"}
+            </span>
+            <Switch
+              checked={acOn}
+              onCheckedChange={setAcOn}
+              className="data-[state=checked]:bg-cyan-500"
+            />
+          </CardContent>
+        </Card>
+
+        {/* Bed Status */}
+        <Card className="bg-neutral-900 border border-neutral-700 shadow-md">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <BedDouble className="w-5 h-5 text-purple-400" />
+              Bed Status
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-neutral-400">
+              Sheets are clean. Room temperature is ideal for sleep.
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
 };
 
-export default BentoGrid;
+export default Bedroom;
