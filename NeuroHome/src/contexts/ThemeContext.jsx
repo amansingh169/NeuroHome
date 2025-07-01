@@ -11,6 +11,7 @@ export const ThemeProvider = ({ children }) => {
     { name: "onyx", icon: <Moon className="w-4 h-4" /> },
     { name: "neon", icon: <Zap className="w-4 h-4" /> },
     { name: "fire", icon: <Flame className="w-4 h-4" /> },
+    
   ];
 
   const [theme, setTheme] = useState("dark");

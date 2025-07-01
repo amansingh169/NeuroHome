@@ -4,27 +4,49 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import { BedDouble, Lamp, ThermometerSun } from "lucide-react";
-import { cn } from "@/lib/utils"; // if you're using classnames utility like Tailwind's `cn`
+import { cn } from "@/lib/utils";
 
 const Bedroom = () => {
   const [lampOn, setLampOn] = useState(true);
   const [acOn, setAcOn] = useState(false);
 
   return (
-    <div className="min-h-screen px-6 py-10 bg-secondary text-white">
-      <h1 className="text-3xl font-bold mb-8 text-center text-primary">Bedroom Dashboard</h1>
+    <div
+      className="min-h-screen px-6 py-10"
+      style={{
+        backgroundColor: "var(--bg-color)",
+        color: "var(--text-color-accent)",
+      }}
+    >
+      <h1
+        className="text-3xl font-bold mb-8 text-center"
+        style={{ color: "var(--accent-color)" }}
+      >
+        Bedroom Dashboard
+      </h1>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {/* Lamp Control */}
-        <Card className="bg-primary border border-neutral-700 shadow-md">
+        <Card
+          className="shadow-md"
+          style={{
+            backgroundColor: "var(--card-bg)",
+            border: "1px solid var(--border-color)",
+          }}
+        >
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-primary">
+            <CardTitle className="flex items-center gap-2">
               <Lamp className="w-5 h-5 text-yellow-400" />
               Bedside Lamp
             </CardTitle>
           </CardHeader>
           <CardContent className="flex justify-between items-center">
-            <span className={cn("text-sm", lampOn ? "text-primary" : "text-muted")}>
+            <span
+              className="text-sm"
+              style={{
+                color: lampOn ? "var(--text-color-accent)" : "var(--text-color)",
+              }}
+            >
               {lampOn ? "On" : "Off"}
             </span>
             <Switch
@@ -36,7 +58,13 @@ const Bedroom = () => {
         </Card>
 
         {/* AC Control */}
-        <Card className="bg-neutral-900 border border-neutral-700 shadow-md">
+        <Card
+          className="shadow-md"
+          style={{
+            backgroundColor: "var(--card-bg)",
+            border: "1px solid var(--border-color)",
+          }}
+        >
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <ThermometerSun className="w-5 h-5 text-cyan-400" />
@@ -44,7 +72,12 @@ const Bedroom = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="flex justify-between items-center">
-            <span className={cn("text-sm", acOn ? "text-primary" : "text-muted")}>
+            <span
+              className="text-sm"
+              style={{
+                color: acOn ? "var(--text-color-accent)" : "var(--text-color)",
+              }}
+            >
               {acOn ? "Cooling" : "Off"}
             </span>
             <Switch
@@ -56,7 +89,13 @@ const Bedroom = () => {
         </Card>
 
         {/* Bed Status */}
-        <Card className="bg-neutral-900 border border-neutral-700 shadow-md">
+        <Card
+          className="shadow-md"
+          style={{
+            backgroundColor: "var(--card-bg)",
+            border: "1px solid var(--border-color)",
+          }}
+        >
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BedDouble className="w-5 h-5 text-purple-400" />
@@ -64,7 +103,7 @@ const Bedroom = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-neutral-400">
+            <p className="text-sm" style={{ color: "var(--text-color)" }}>
               Sheets are clean. Room temperature is ideal for sleep.
             </p>
           </CardContent>

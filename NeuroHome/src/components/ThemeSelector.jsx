@@ -29,7 +29,8 @@ const ThemeSelector = () => {
       <SelectContent className="bg-card">
         {availableThemes.map((t) => (
           <SelectItem value={t.name} key={t.name}>
-            <div className="flex items-center gap-2 text-muted">
+            <div className="flex items-center gap-2 text-gray-400 hover:text-primary transition-colors duration-300">
+
               {t.icon}
               {t.name.charAt(0).toUpperCase() + t.name.slice(1)} Theme
             </div>

@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import { useContext } from "react";
+import { ThemeContext } from "@/contexts/ThemeContext";
+
 
 import MyHome from "./pages/Home";
 import LivingRoom from "./pages/livingroom";
@@ -10,8 +13,12 @@ import Bathroom from "./pages/Bathroom";
 import Bedroom from "./pages/Bedroom";
 
 function App() {
+  const { theme } = useContext(ThemeContext);
   return (
     <Router>
+      <div data-theme={theme}>
+      {/* your routes or layout */}
+    
       <div className="min-h-screen flex flex-col bg text-white">
         {/* Navbar */}
         <Navbar />
@@ -28,6 +35,7 @@ function App() {
             <Route path="/bedroom" element={<Bedroom />} />
           </Routes>
         </main>
+      </div>
       </div>
     </Router>
   );
