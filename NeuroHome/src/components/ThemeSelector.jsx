@@ -10,32 +10,29 @@ import {
 
 const ThemeSelector = () => {
   const { theme, setTheme, availableThemes } = useContext(ThemeContext);
+  const selected = availableThemes.find((t) => t.name === theme);
 
   return (
-    // <select
-    //   className="form-select"
-    //   value={theme}
-    //   onChange={(e) => {
-    //     setTheme(e.target.value);
-    //   }}
-    //   style={{ width: "300px" }}
-    // >
-    // {availableThemes.map((theme) => (
-    //   <option value={theme.name} key={theme.name}>
-    //     {theme.icon}
-    //     {theme.name.charAt(0).toUpperCase() + theme.name.slice(1) + " Theme"}
-    //   </option>
-    // ))}
-    // </select>
-
-    <Select>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue />
+    <Select value={theme} onValueChange={setTheme}>
+      <SelectTrigger className="w-[200px] text-primary bg-card rounded-full">
+        <SelectValue
+          placeholder="Theme"
+          children={
+            <div className="flex items-center gap-2 text-sm">
+              {selected?.icon}
+              {selected?.name.charAt(0).toUpperCase() + selected?.name.slice(1)} Theme
+            </div>
+          }
+        />
       </SelectTrigger>
-      <SelectContent>
-        {availableThemes.map((theme) => (
-          <SelectItem value={theme.name}>
-            {theme.name.charAt(0).toUpperCase() + theme.name.slice(1) + " Theme"}
+
+      <SelectContent className="bg-card">
+        {availableThemes.map((t) => (
+          <SelectItem value={t.name} key={t.name}>
+            <div className="flex items-center gap-2 text-muted">
+              {t.icon}
+              {t.name.charAt(0).toUpperCase() + t.name.slice(1)} Theme
+            </div>
           </SelectItem>
         ))}
       </SelectContent>

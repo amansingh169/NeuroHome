@@ -1,23 +1,10 @@
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import ThemeSelector from "@/components/ThemeSelector";
-import {
-  Home as HomeIcon,
-  Camera,
-  Power,
-  Thermometer,
-  Book,
-  Briefcase,
-  Heart,
-} from "lucide-react";
+import { Home as HomeIcon, Camera, Power, Thermometer, Book, Briefcase, Heart } from "lucide-react";
 
 const Home = () => {
   const { theme } = useContext(ThemeContext); // Ensure context is applied
@@ -45,12 +32,12 @@ const Home = () => {
   return (
     <div className="max-w-6xl mx-auto p-6">
       {/* Theme selector */}
-      <ThemeSelector />
 
       {/* Top bar */}
       <div className="flex justify-between items-center mb-6">
         <p className="text-sm text-muted">Thu, Jan 12</p>
         <p className="text-sm text-muted">Today will be cloudy. Apply SPF during the day.</p>
+        <ThemeSelector />
       </div>
 
       {/* Grid layout */}
@@ -58,7 +45,7 @@ const Home = () => {
         {/* Rooms */}
         <Card className="col-span-1">
           <CardHeader>
-            <CardTitle className="text-sm text-muted font-medium text-primary">Rooms</CardTitle>
+            <CardTitle className="text-sm text-muted font-medium">Rooms</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             {rooms.map((room, idx) => (
@@ -73,7 +60,7 @@ const Home = () => {
         {/* Lighting */}
         <Card className="col-span-1 text-muted">
           <CardHeader>
-            <CardTitle className="text-sm font-medium text-primary">Lighting</CardTitle>
+            <CardTitle className="text-sm font-medium">Lighting</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex justify-between text-sm mb-2">
@@ -85,13 +72,13 @@ const Home = () => {
         </Card>
 
         {/* Devices */}
-        <Card className="col-span-1">
+        <Card className="col-span-1 text-muted">
           <CardHeader>
-            <CardTitle className="text-sm text-muted font-medium text-primary">Devices</CardTitle>
+            <CardTitle className="text-sm font-medium">Devices</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             {devices.map((device, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-sm text-muted cursor-pointer">
+              <div key={idx} className="flex items-center gap-2 text-sm cursor-pointer">
                 {device.icon}
                 {device.name}
               </div>
@@ -100,13 +87,13 @@ const Home = () => {
         </Card>
 
         {/* Modes */}
-        <Card className="col-span-1">
+        <Card className="col-span-1 text-muted">
           <CardHeader>
-            <CardTitle className="text-sm text-muted font-medium text-primary">Modes</CardTitle>
+            <CardTitle className="text-sm font-medium">Modes</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             {modes.map((mode, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-sm text-muted cursor-pointer">
+              <div key={idx} className="flex items-center gap-2 text-sm cursor-pointer">
                 {mode.icon}
                 {mode.name}
               </div>
@@ -115,12 +102,12 @@ const Home = () => {
         </Card>
 
         {/* Temperature */}
-        <Card className="col-span-2">
+        <Card className="col-span-2 text-muted">
           <CardHeader>
-            <CardTitle className="text-sm text-muted font-medium text-primary">Temperature</CardTitle>
+            <CardTitle className="text-sm font-medium">Temperature</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex justify-between text-muted">
+            <div className="flex justify-between">
               <div className="text-center">
                 <p className="text-2xl font-medium text-primary">20°C</p>
                 <p className="text-xs">Current</p>
@@ -140,19 +127,19 @@ const Home = () => {
         {/* Electricity */}
         <Card className="col-span-1 text-muted">
           <CardHeader>
-            <CardTitle className="text-sm font-medium text-primary">Electricity</CardTitle>
+            <CardTitle className="text-sm font-medium">Electricity</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-xs mb-1">Month</p>
             <p className="text-2xl font-medium mb-2 text-primary">360kW</p>
-            <Progress value={65} className="h-2" />
+            <Progress value={65} className="h-2 bg-secondary" />
           </CardContent>
         </Card>
 
         {/* Wi-Fi */}
-        <Card className="col-span-1">
+        <Card className="col-span-1 text-muted">
           <CardHeader>
-            <CardTitle className="text-sm text-muted font-medium text-primary">Wi-Fi</CardTitle>
+            <CardTitle className="text-sm font-medium">Wi-Fi</CardTitle>
           </CardHeader>
           <CardContent className="space-y-1 text-muted text-sm">
             <p>25 M²</p>
@@ -165,10 +152,18 @@ const Home = () => {
         <Card className="col-span-4">
           <CardContent className="p-4">
             <div className="grid grid-cols-4 gap-4">
-              <Button variant="default" className="w-full">Go Dock</Button>
-              <Button variant="default" className="w-full">Push</Button>
-              <Button variant="default" className="w-full">Action</Button>
-              <Button variant="default" className="w-full">Gosling</Button>
+              <Button variant="default" className="w-full">
+                Go Dock
+              </Button>
+              <Button variant="default" className="w-full">
+                Push
+              </Button>
+              <Button variant="default" className="w-full">
+                Action
+              </Button>
+              <Button variant="default" className="w-full">
+                Gosling
+              </Button>
             </div>
           </CardContent>
         </Card>

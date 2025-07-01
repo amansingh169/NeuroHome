@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { Sun, SunDim, SunMoon, Moon, Zap, Flame } from "lucide-react";
+import { Sun, SunDim, Eclipse, Moon, Zap, Flame } from "lucide-react";
 
 export const ThemeContext = createContext();
 
@@ -7,7 +7,7 @@ export const ThemeProvider = ({ children }) => {
   const availableThemes = [
     { name: "light", icon: <Sun className="w-4 h-4" /> },
     { name: "ash", icon: <SunDim className="w-4 h-4" /> },
-    { name: "dark", icon: <SunMoon className="w-4 h-4" /> },
+    { name: "dark", icon: <Eclipse className="w-4 h-4" /> },
     { name: "onyx", icon: <Moon className="w-4 h-4" /> },
     { name: "neon", icon: <Zap className="w-4 h-4" /> },
     { name: "fire", icon: <Flame className="w-4 h-4" /> },
