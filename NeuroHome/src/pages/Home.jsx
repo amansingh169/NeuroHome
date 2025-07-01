@@ -1,16 +1,33 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import ThemeSelector from "@/components/ThemeSelector";
-import { Home, Camera, Power, Thermometer, Book, Briefcase, Heart } from "lucide-react";
+import {
+  Home as HomeIcon,
+  Camera,
+  Power,
+  Thermometer,
+  Book,
+  Briefcase,
+  Heart,
+} from "lucide-react";
 
-const SmartHomeGrid = () => {
+const Home = () => {
+  const { theme } = useContext(ThemeContext); // Ensure context is applied
+
   const rooms = [
-    { name: "Living room", icon: <Home className="w-4 h-4" /> },
-    { name: "Bedroom", icon: <Home className="w-4 h-4" /> },
-    { name: "Kitchen", icon: <Home className="w-4 h-4" /> },
-    { name: "Office", icon: <Home className="w-4 h-4" /> },
-    { name: "Bathroom", icon: <Home className="w-4 h-4" /> },
+    { name: "Living room", icon: <HomeIcon className="w-4 h-4" /> },
+    { name: "Bedroom", icon: <HomeIcon className="w-4 h-4" /> },
+    { name: "Kitchen", icon: <HomeIcon className="w-4 h-4" /> },
+    { name: "Office", icon: <HomeIcon className="w-4 h-4" /> },
+    { name: "Bathroom", icon: <HomeIcon className="w-4 h-4" /> },
   ];
 
   const devices = [
@@ -27,14 +44,18 @@ const SmartHomeGrid = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
+      {/* Theme selector */}
       <ThemeSelector />
 
+      {/* Top bar */}
       <div className="flex justify-between items-center mb-6">
         <p className="text-sm text-muted">Thu, Jan 12</p>
         <p className="text-sm text-muted">Today will be cloudy. Apply SPF during the day.</p>
       </div>
 
+      {/* Grid layout */}
       <div className="grid grid-cols-4 gap-4">
+        {/* Rooms */}
         <Card className="col-span-1">
           <CardHeader>
             <CardTitle className="text-sm text-muted font-medium text-primary">Rooms</CardTitle>
@@ -49,6 +70,7 @@ const SmartHomeGrid = () => {
           </CardContent>
         </Card>
 
+        {/* Lighting */}
         <Card className="col-span-1 text-muted">
           <CardHeader>
             <CardTitle className="text-sm font-medium text-primary">Lighting</CardTitle>
@@ -62,6 +84,7 @@ const SmartHomeGrid = () => {
           </CardContent>
         </Card>
 
+        {/* Devices */}
         <Card className="col-span-1">
           <CardHeader>
             <CardTitle className="text-sm text-muted font-medium text-primary">Devices</CardTitle>
@@ -76,6 +99,7 @@ const SmartHomeGrid = () => {
           </CardContent>
         </Card>
 
+        {/* Modes */}
         <Card className="col-span-1">
           <CardHeader>
             <CardTitle className="text-sm text-muted font-medium text-primary">Modes</CardTitle>
@@ -90,11 +114,10 @@ const SmartHomeGrid = () => {
           </CardContent>
         </Card>
 
+        {/* Temperature */}
         <Card className="col-span-2">
           <CardHeader>
-            <CardTitle className="text-sm text-muted font-medium text-primary">
-              Temperature
-            </CardTitle>
+            <CardTitle className="text-sm text-muted font-medium text-primary">Temperature</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex justify-between text-muted">
@@ -114,6 +137,7 @@ const SmartHomeGrid = () => {
           </CardContent>
         </Card>
 
+        {/* Electricity */}
         <Card className="col-span-1 text-muted">
           <CardHeader>
             <CardTitle className="text-sm font-medium text-primary">Electricity</CardTitle>
@@ -125,6 +149,7 @@ const SmartHomeGrid = () => {
           </CardContent>
         </Card>
 
+        {/* Wi-Fi */}
         <Card className="col-span-1">
           <CardHeader>
             <CardTitle className="text-sm text-muted font-medium text-primary">Wi-Fi</CardTitle>
@@ -136,21 +161,14 @@ const SmartHomeGrid = () => {
           </CardContent>
         </Card>
 
+        {/* Buttons */}
         <Card className="col-span-4">
           <CardContent className="p-4">
             <div className="grid grid-cols-4 gap-4">
-              <Button variant="default" className="w-full">
-                Go Dock
-              </Button>
-              <Button variant="default" className="w-full">
-                Push
-              </Button>
-              <Button variant="default" className="w-full">
-                Action
-              </Button>
-              <Button variant="default" className="w-full">
-                Gosling
-              </Button>
+              <Button variant="default" className="w-full">Go Dock</Button>
+              <Button variant="default" className="w-full">Push</Button>
+              <Button variant="default" className="w-full">Action</Button>
+              <Button variant="default" className="w-full">Gosling</Button>
             </div>
           </CardContent>
         </Card>
@@ -159,4 +177,4 @@ const SmartHomeGrid = () => {
   );
 };
 
-export default SmartHomeGrid;
+export default Home;

@@ -1,83 +1,67 @@
-import { Link } from "react-router";
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuViewport,
-} from "./ui/navigation-menu";
+} from "@/components/ui/navigation-menu";
+import { NavLink } from "react-router-dom";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const Navbar = () => {
   return (
-    <nav className="w-full border-b shadow-sm bg-background px-6 py-3">
-      <NavigationMenu>
-        <NavigationMenuList className="gap-4">
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
-              <Link
-                to="/"
-                className="text-sm font-medium hover:text-accent-foreground transition-colors"
-              >
-                MyHome
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
-              <Link
-                to="/living-room"
-                className="text-sm font-medium hover:text-accent-foreground transition-colors"
-              >
-                Living Room
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
-              <Link
-                to="/bedroom"
-                className="text-sm font-medium hover:text-accent-foreground transition-colors"
-              >
-                Bedroom
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
-              <Link
-                to="/kitchen"
-                className="text-sm font-medium hover:text-accent-foreground transition-colors"
-              >
-                Kitchen
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
-              <Link
-                to="/office"
-                className="text-sm font-medium hover:text-accent-foreground transition-colors"
-              >
-                Office
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
-              <Link
-                to="/bathroom"
-                className="text-sm font-medium hover:text-accent-foreground transition-colors"
-              >
-                Bathroom
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-    </nav>
+    <header className="w-full border-b border-neutral-800 shadow-md bg-black">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Left: Date */}
+        <div className="text-sm text-neutral-400">
+          {new Date().toLocaleDateString("en-US", {
+            weekday: "short",
+            month: "short",
+            day: "numeric",
+          })}
+        </div>
+
+        {/* Center: Navigation Menu (centered using flex-grow) */}
+        <div className="flex-grow flex justify-center">
+          <NavigationMenu>
+            <NavigationMenuList className="gap-6">
+              {[
+                { path: "/", label: "Home" },
+                { path: "/living-room", label: "Living Room" },
+                { path: "/bedroom", label: "Bedroom" },
+                { path: "/kitchen", label: "Kitchen" },
+                { path: "/office", label: "Office" },
+                { path: "/bathroom", label: "Bathroom" },
+              ].map(({ path, label }) => (
+                <NavigationMenuItem key={path}>
+                  <NavigationMenuLink asChild>
+                    <NavLink
+                      to={path}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "text-white font-semibold"
+                          : "text-neutral-400"
+                      }
+                    >
+                      {label}
+                    </NavLink>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+            <NavigationMenuViewport />
+          </NavigationMenu>
+        </div>
+
+        {/* Right: Avatar */}
+        <Avatar className="w-8 h-8">
+          <AvatarImage src="https://i.pravatar.cc/40" alt="Profile" />
+          <AvatarFallback>U</AvatarFallback>
+        </Avatar>
+      </div>
+    </header>
   );
 };
 
