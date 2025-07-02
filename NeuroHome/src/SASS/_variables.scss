@@ -55,7 +55,7 @@
 
 [data-theme="onyx"] {
   --bg-color: #000000;
-  --text-color: #f08b38;
+  --text-color: #ffffff;
   --text-color-2: #f5c3c3;
   --text-color-accent: #e0e0e0;
   --accent-color: #ff6f00;
@@ -69,14 +69,14 @@
 }
 
 [data-theme="neon"] {
-  --bg-color: #0f0f1a;
+  --bg-color: #0a0a0a;
   --text-color: #705470;
   --text-color-2: #1a1a1e;
-  --text-color-accent: #a8d897;
-  --accent-color: #a8d897;
+  --text-color-accent: #ffffff;
+  --accent-color: #00ffff;
   --accent-color-2: #381a38;
-  --card-bg: #1a1a2e;
-  --border-color: #2f2f5f;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.1);
   --link-color: #a8d897;
 
   --contrast-full: #fff;

@@ -87,6 +87,10 @@ body {
 .border {
   border-color: var(--border-color);
 }
+.drop-shadow-glow {
+  text-shadow: 0 0 8px currentColor;
+}
+
 
 svg {
   color: var(--text-color-accent) !important;
