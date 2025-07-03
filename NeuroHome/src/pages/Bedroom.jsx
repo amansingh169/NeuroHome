@@ -42,6 +42,7 @@ const Bedroom = () => {
   const [ambienceOn, setAmbienceOn] = useState(false);
   const [volume, setVolume] = useState(50);
   const [selectedScene, setSelectedScene] = useState("Sleep");
+  const [alexa, setAlexaon] = useState(false);
 
   const scenes = [
     { name: "Reading", icon: <Sun className="w-4 h-4" />, color: "#00d9ff" },
@@ -66,6 +67,8 @@ const volumeColor = getVolumeGlowColor(volume);
           fontSize: "var(--fs-xl)",
           color: "var(--accent-color)",
           textShadow: "0 0 10px var(--accent-color)",
+          background: "var(--card-bg)",
+          rounded: "2xl",
         }}
       >
         Bedroom Dashboard
@@ -231,11 +234,24 @@ const volumeColor = getVolumeGlowColor(volume);
               />
             ))}
           </CardContent>
+          
         </Card>
+        <SmartCard
+        title="Alexa"
+          icon={<SlidersHorizontal className="w-6 h-6 text-pink-400" />}
+          status={alexa ? "On" : "Off"}
+          checked={alexa}
+          onToggle={setAlexaon}
+          glowColor="#6600CC"
+        />
+        
+        
       </div>
     </div>
   );
 };
+
+
 
 const SmartCard = ({ title, icon, status, checked, onToggle, glowColor }) => (
   <Card
