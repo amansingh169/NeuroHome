@@ -1,14 +1,9 @@
-import { useContext } from "react";
-import { ThemeContext } from "../contexts/ThemeContext";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import ThemeSelector from "@/components/ThemeSelector";
 import { Home as HomeIcon, Camera, Power, Thermometer, Book, Briefcase, Heart } from "lucide-react";
 
 const Home = () => {
-  const { theme } = useContext(ThemeContext); // Ensure context is applied
-
   const rooms = [
     { name: "Living room", icon: <HomeIcon className="w-4 h-4" /> },
     { name: "Bedroom", icon: <HomeIcon className="w-4 h-4" /> },
@@ -30,14 +25,13 @@ const Home = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-6 bg-primary rounded-3xl border border-stone-400 border-solid">
       {/* Theme selector */}
 
       {/* Top bar */}
       <div className="flex justify-between items-center mb-6">
         <p className="text-sm text-muted">Thu, Jan 12</p>
         <p className="text-sm text-muted">Today will be cloudy. Apply SPF during the day.</p>
-        <ThemeSelector />
       </div>
 
       {/* Grid layout */}

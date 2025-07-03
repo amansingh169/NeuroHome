@@ -1,307 +1,169 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
-import { useState } from "react";
-import {
-  BedDouble,
-  Lamp,
-  ThermometerSun,
-  Fan,
-  Music,
-  Sun,
-  Moon,
-  PartyPopper,
-  SlidersHorizontal,
-  Speaker,
-  MoveHorizontal,
-} from "lucide-react";
-const getFanGlowColor = (speed) => {
-  switch (speed) {
-    case 1: return "#3b82f6"; // blue-500
-    case 2: return "#0ea5e9"; // sky-500
-    case 3: return "#eab308"; // yellow-500
-    case 4: return "#f97316"; // orange-500
-    case 5: return "#ef4444"; // red-500
-    default: return "#3b82f6";
-  }
-};
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Home as HomeIcon, Camera, Power, Thermometer, Book, Briefcase, Heart } from "lucide-react";
 
-const getVolumeGlowColor = (volume) => {
-  if (volume <= 20) return "#22c55e";     // green
-  if (volume <= 40) return "#06b6d4";     // cyan
-  if (volume <= 60) return "#eab308";     // yellow
-  if (volume <= 80) return "#f97316";     // orange
-  return "#ef4444";                       // red
-};
-
-const Bedroom = () => {
-  const [lampOn, setLampOn] = useState(true);
-  const [acOn, setAcOn] = useState(false);
-  const [fanOn, setFanOn] = useState(true);
-  const [fanSpeed, setFanSpeed] = useState(3);
-  const [curtainsOpen, setCurtainsOpen] = useState(true);
-  const [ambienceOn, setAmbienceOn] = useState(false);
-  const [volume, setVolume] = useState(50);
-  const [selectedScene, setSelectedScene] = useState("Sleep");
-  const [alexa, setAlexaon] = useState(false);
-
-  const scenes = [
-    { name: "Reading", icon: <Sun className="w-4 h-4" />, color: "#00d9ff" },
-    { name: "Sleep", icon: <Moon className="w-4 h-4" />, color: "#b49eff" },
-    { name: "Party", icon: <PartyPopper className="w-4 h-4" />, color: "#ff4a9d" },
+const Home = () => {
+  const rooms = [
+    { name: "Living room", icon: <HomeIcon className="w-4 h-4" /> },
+    { name: "Bedroom", icon: <HomeIcon className="w-4 h-4" /> },
+    { name: "Kitchen", icon: <HomeIcon className="w-4 h-4" /> },
+    { name: "Office", icon: <HomeIcon className="w-4 h-4" /> },
+    { name: "Bathroom", icon: <HomeIcon className="w-4 h-4" /> },
   ];
-const fanColor = getFanGlowColor(fanSpeed);
-const volumeColor = getVolumeGlowColor(volume);
+
+  const devices = [
+    { name: "Camera", icon: <Camera className="w-4 h-4" /> },
+    { name: "Robotic Vacuum", icon: <Power className="w-4 h-4" /> },
+    { name: "Air Conditioning", icon: <Thermometer className="w-4 h-4" /> },
+  ];
+
+  const modes = [
+    { name: "Reading", icon: <Book className="w-4 h-4" /> },
+    { name: "Working", icon: <Briefcase className="w-4 h-4" /> },
+    { name: "Romantic", icon: <Heart className="w-4 h-4" /> },
+  ];
 
   return (
-    <div
-      className="min-h-screen px-6 py-10 transition-all duration-300"
-      style={{
-        backgroundColor: "var(--bg-color)",
-        color: "var(--text-color-accent)",
-        fontSize: "var(--fs-base)",
-      }}
-    >
-      <h1
-        className="text-center font-bold mb-10"
-        style={{
-          fontSize: "var(--fs-xl)",
-          fontFamily: "var(--font-heading)",
-          color: "var(--text-color-accent)",
-          textShadow: "0 0 10px var(--accent-color)",
-          background: "var(--card-bg)",
-          rounded: "2xl",
-        }}
-      >
-        LivingRoom Dashboard
-      </h1>
+    <div className="max-w-6xl mx-auto p-6 bg-primary rounded-3xl border border-stone-400 border-solid">
+      {/* Theme selector */}
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {/* Top bar */}
+      <div className="flex justify-between items-center mb-6">
+        <p className="text-sm text-muted">Thu, Jan 12</p>
+        <p className="text-sm text-muted">Today will be cloudy. Apply SPF during the day.</p>
+      </div>
 
-        <SmartCard
-          title="Air Conditioner"
-          icon={<ThermometerSun className="w-6 h-6 text-cyan-400" />}
-          status={acOn ? "Cooling" : "Off"}
-          checked={acOn}
-          onToggle={setAcOn}
-          glowColor="#22d3ee"
-        />
-        
-        <SmartCard
-          title="Ventilation"
-          icon={<Lamp className="w-6 h-6 text-yellow-400" />}
-          status={lampOn ? "On" : "Off"}
-          checked={lampOn}
-          onToggle={setLampOn}
-          glowColor="#facc15"
-        />
-
-        <Card
-  className="rounded-2xl backdrop-blur-md transition-shadow duration-300"
-  style={{
-    backgroundColor: "var(--card-bg)",
-    border: "1px solid var(--border-color)",
-    color: "var(--text-color-accent)",
-    boxShadow: fanOn ? `0 0 15px ${fanColor}` : "none",
-  }}
->
-  <CardHeader>
-    <CardTitle className="flex items-center gap-3 text-blue-400">
-      <Fan className="w-6 h-6" />
-      Ceiling Fan
-    </CardTitle>
-  </CardHeader>
-  <CardContent className="flex flex-col gap-4">
-    <div className="flex justify-between items-center">
-      <span className="text-sm">{fanOn ? `Speed ${fanSpeed}` : "Off"}</span>
-      <Switch
-        checked={fanOn}
-        onCheckedChange={setFanOn}
-        style={{ backgroundColor: fanOn ? "cyan" : undefined }}
-      />
-    </div>
-
-    {fanOn && (
-      <input
-        type="range"
-        min={1}
-        max={5}
-        value={fanSpeed}
-        onChange={(e) => setFanSpeed(Number(e.target.value))}
-        className="w-full"
-        style={{ accentColor: fanColor }}
-      />
-    )}
-  </CardContent>
-</Card>
-
-
-        <SmartCard
-          title="Room  Lights"
-          icon={<SlidersHorizontal className="w-6 h-6 text-pink-400" />}
-          status={ambienceOn ? "On" : "Off"}
-          checked={ambienceOn}
-          onToggle={setAmbienceOn}
-          glowColor="#ec4899"
-        />
-
-        <SmartCard
-          title="Curtains"
-          icon={<MoveHorizontal className="w-6 h-6 text-lime-400" />}
-          status={curtainsOpen ? "Open" : "Closed"}
-          checked={curtainsOpen}
-          onToggle={setCurtainsOpen}
-          glowColor="#84cc16"
-        />
-
-        <Card className="rounded-2xl backdrop-blur-md" style={{
-          backgroundColor: "var(--card-bg)",
-          border: "1px solid var(--border-color)"
-        }}>
+      {/* Grid layout */}
+      <div className="grid grid-cols-4 gap-4">
+        {/* Rooms */}
+        <Card className="col-span-1">
           <CardHeader>
-            <CardTitle className="flex items-center gap-3 text-rose-400">
-              <ThermometerSun className="w-6 h-6" />
-              Temperature
-            </CardTitle>
+            <CardTitle className="text-sm text-muted font-medium">Rooms</CardTitle>
           </CardHeader>
-          <CardContent>
-            <p className="text-lg font-semibold" style={{ color: "var(--accent-color)" }}>
-              23°C – Ideal for sleep
-            </p>
-            <p className="text-sm" style={{ color: "var(--text-color)" }}>
-              Humidity: 36%
-            </p>
-          </CardContent>
-        </Card>
-
-<Card
-  className="rounded-2xl backdrop-blur-md transition-shadow duration-300"
-  style={{
-    backgroundColor: "var(--card-bg)",
-    border: "1px solid var(--border-color)",
-    color: "var(--text-color-accent)",
-    boxShadow: `0 0 15px ${volumeColor}`,
-  }}
->
-  <CardHeader>
-    <CardTitle className="flex items-center gap-3 text-fuchsia-400">
-      <Music className="w-6 h-6" />
-      Music Player
-    </CardTitle>
-  </CardHeader>
-  <CardContent className="space-y-3">
-    <div className="text-sm">
-      Now Playing: <strong>Lo-Fi Vibes</strong>
-    </div>
-    <div className="text-xs text-[var(--text-color)]">
-      Bedroom Speakers <Speaker className="inline-block w-4 h-4 ml-1" />
-    </div>
-
-    <input
-      type="range"
-      min={0}
-      max={100}
-      step={1}
-      value={volume}
-      onChange={(e) => setVolume(Number(e.target.value))}
-      className="w-full"
-      style={{ accentColor: volumeColor }}
-    />
-
-    <div className="text-xs text-right text-[var(--text-color)]">
-      Volume: {volume}%
-    </div>
-  </CardContent>
-</Card>
-
-        <Card className="rounded-2xl backdrop-blur-md" style={{
-          backgroundColor: "var(--card-bg)",
-          border: "1px solid var(--border-color)"
-        }}>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3 text-emerald-400">
-              <SlidersHorizontal className="w-6 h-6" />
-              Scene
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-2">
-            {scenes.map((scene) => (
-              <GlowButton
-                key={scene.name}
-                active={selectedScene === scene.name}
-                label={scene.name}
-                icon={scene.icon}
-                onClick={() => setSelectedScene(scene.name)}
-                activeColor={scene.color}
-              />
+          <CardContent className="space-y-2">
+            {rooms.map((room, idx) => (
+              <div key={idx} className="flex items-center gap-2 text-sm text-muted cursor-pointer">
+                {room.icon}
+                {room.name}
+              </div>
             ))}
           </CardContent>
-          
         </Card>
-        <SmartCard
-        title="Alexa"
-          icon={<SlidersHorizontal className="w-6 h-6 text-pink-400" />}
-          status={alexa ? "On" : "Off"}
-          checked={alexa}
-          onToggle={setAlexaon}
-          glowColor="#6600CC"
-        />
-        
-        
+
+        {/* Lighting */}
+        <Card className="col-span-1 text-muted">
+          <CardHeader>
+            <CardTitle className="text-sm font-medium">Lighting</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex justify-between text-sm mb-2">
+              <span>30%</span>
+              <span>80%</span>
+            </div>
+            <Progress value={30} className="h-2 bg-secondary" />
+          </CardContent>
+        </Card>
+
+        {/* Devices */}
+        <Card className="col-span-1 text-muted">
+          <CardHeader>
+            <CardTitle className="text-sm font-medium">Devices</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {devices.map((device, idx) => (
+              <div key={idx} className="flex items-center gap-2 text-sm cursor-pointer">
+                {device.icon}
+                {device.name}
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
+        {/* Modes */}
+        <Card className="col-span-1 text-muted">
+          <CardHeader>
+            <CardTitle className="text-sm font-medium">Modes</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {modes.map((mode, idx) => (
+              <div key={idx} className="flex items-center gap-2 text-sm cursor-pointer">
+                {mode.icon}
+                {mode.name}
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
+        {/* Temperature */}
+        <Card className="col-span-2 text-muted">
+          <CardHeader>
+            <CardTitle className="text-sm font-medium">Temperature</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex justify-between">
+              <div className="text-center">
+                <p className="text-2xl font-medium text-primary">20°C</p>
+                <p className="text-xs">Current</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-medium text-primary">23°C</p>
+                <p className="text-xs">Target</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-medium text-primary">80°C</p>
+                <p className="text-xs">Water</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Electricity */}
+        <Card className="col-span-1 text-muted">
+          <CardHeader>
+            <CardTitle className="text-sm font-medium">Electricity</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-xs mb-1">Month</p>
+            <p className="text-2xl font-medium mb-2 text-primary">360kW</p>
+            <Progress value={65} className="h-2 bg-secondary" />
+          </CardContent>
+        </Card>
+
+        {/* Wi-Fi */}
+        <Card className="col-span-1 text-muted">
+          <CardHeader>
+            <CardTitle className="text-sm font-medium">Wi-Fi</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-1 text-muted text-sm">
+            <p>25 M²</p>
+            <p>25%</p>
+            <p>15 Min Loft</p>
+          </CardContent>
+        </Card>
+
+        {/* Buttons */}
+        <Card className="col-span-4">
+          <CardContent className="p-4">
+            <div className="grid grid-cols-4 gap-4">
+              <Button variant="default" className="w-full">
+                Go Dock
+              </Button>
+              <Button variant="default" className="w-full">
+                Push
+              </Button>
+              <Button variant="default" className="w-full">
+                Action
+              </Button>
+              <Button variant="default" className="w-full">
+                Gosling
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
 };
 
-
-
-const SmartCard = ({ title, icon, status, checked, onToggle, glowColor }) => (
-  <Card
-    className="rounded-2xl backdrop-blur-md transition-shadow duration-300"
-    style={{
-      backgroundColor: "var(--card-bg)",
-      border: "1px solid var(--border-color)",
-      color: "var(--text-color-accent)",
-      boxShadow: checked ? `0 0 15px ${glowColor}` : "none",
-    }}
-  >
-    <CardHeader>
-      <CardTitle className="flex items-center gap-3">{icon} {title}</CardTitle>
-    </CardHeader>
-    <CardContent className="flex justify-between items-center">
-      <span style={{ color: checked ? "var(--text-color-accent)" : "var(--text-color)" }}>
-        {status}
-      </span>
-      <Switch
-        checked={checked}
-        onCheckedChange={onToggle}
-        style={{ backgroundColor: checked ? glowColor : undefined }}
-      />
-    </CardContent>
-  </Card>
-);
-
-const GlowButton = ({ active, icon, label, onClick, activeColor }) => {
-  return (
-    <button
-      onClick={onClick}
-      className={`flex items-center gap-2 w-full px-4 py-2 rounded-xl font-medium text-sm transition
-        ${
-          active
-            ? "text-[var(--contrast-zero)]"
-            : "text-[var(--text-color-accent)] hover:bg-[var(--accent-color-2)]"
-        }
-      `}
-      style={{
-        backgroundColor: active ? activeColor : "var(--card-bg)",
-        border: "1px solid var(--border-color)",
-        backdropFilter: "blur(6px)",
-        boxShadow: active ? `0 0 10px ${activeColor}` : "none",
-      }}
-    >
-      {icon}
-      {label}
-    </button>
-  );
-};
-
-export default Bedroom;
+export default Home;

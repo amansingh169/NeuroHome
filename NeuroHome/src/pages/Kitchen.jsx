@@ -16,12 +16,18 @@ import {
 
 const getFanGlowColor = (speed) => {
   switch (speed) {
-    case 1: return "#3b82f6";
-    case 2: return "#0ea5e9";
-    case 3: return "#eab308";
-    case 4: return "#f97316";
-    case 5: return "#ef4444";
-    default: return "#3b82f6";
+    case 1:
+      return "#3b82f6";
+    case 2:
+      return "#0ea5e9";
+    case 3:
+      return "#eab308";
+    case 4:
+      return "#f97316";
+    case 5:
+      return "#ef4444";
+    default:
+      return "#3b82f6";
   }
 };
 
@@ -35,8 +41,7 @@ const Kitchen = () => {
   const [leakDetected, setLeakDetected] = useState(false);
   const [scene, setScene] = useState("Cooking");
   const [dishwasherOn, setDishwasherOn] = useState(false);
-const [alexaOn, setAlexaOn] = useState(false);
-
+  const [alexaOn, setAlexaOn] = useState(false);
 
   const scenes = [
     { name: "Cooking", icon: <CookingPot className="w-4 h-4" />, color: "#ff9c00" },
@@ -47,14 +52,7 @@ const [alexaOn, setAlexaOn] = useState(false);
   const fanColor = getFanGlowColor(exhaustSpeed);
 
   return (
-    <div
-      className="min-h-screen px-6 py-10"
-      style={{
-        backgroundColor: "var(--bg-color)",
-        color: "var(--text-color-accent)",
-        fontSize: "var(--fs-base)",
-      }}
-    >
+    <div className="max-w-6xl mx-auto p-6 bg-primary rounded-3xl border border-stone-400 border-solid">
       <h1
         className="text-center font-bold mb-10"
         style={{
@@ -180,25 +178,22 @@ const [alexaOn, setAlexaOn] = useState(false);
         </Card>
         <SmartCard
           title="Smart Dishwasher"
-        icon={<Soup className="w-6 h-6 text-purple-400" />}
-        status={dishwasherOn ? "Running" : "Idle"}
-        checked={dishwasherOn}
-        onToggle={setDishwasherOn}
-        glowColor="#a855f7"
+          icon={<Soup className="w-6 h-6 text-purple-400" />}
+          status={dishwasherOn ? "Running" : "Idle"}
+          checked={dishwasherOn}
+          onToggle={setDishwasherOn}
+          glowColor="#a855f7"
         />
 
         <SmartCard
           title="Alexa"
-        icon={<SlidersHorizontal className="w-6 h-6 text-pink-400" />}
-        status={alexaOn ? "Listening" : "Muted"}
-        checked={alexaOn}
-        onToggle={setAlexaOn}
-        glowColor="#d946ef"
+          icon={<SlidersHorizontal className="w-6 h-6 text-pink-400" />}
+          status={alexaOn ? "Listening" : "Muted"}
+          checked={alexaOn}
+          onToggle={setAlexaOn}
+          glowColor="#d946ef"
         />
-
-        
       </div>
-      
     </div>
   );
 };
@@ -214,7 +209,9 @@ const SmartCard = ({ title, icon, status, checked, onToggle, glowColor }) => (
     }}
   >
     <CardHeader>
-      <CardTitle className="flex items-center gap-3">{icon} {title}</CardTitle>
+      <CardTitle className="flex items-center gap-3">
+        {icon} {title}
+      </CardTitle>
     </CardHeader>
     <CardContent className="flex justify-between items-center">
       <span style={{ color: checked ? "var(--text-color-accent)" : "var(--text-color)" }}>

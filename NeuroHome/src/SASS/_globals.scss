@@ -6,12 +6,18 @@ html {
   scroll-behavior: auto !important;
 }
 
+.bg-primary {
+  background-color: var(--bg-color) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
 .bg-secondary {
   background-color: var(--accent-color-2) !important;
 }
 
 .bg-card {
   background-color: var(--card-bg) !important;
+  backdrop-filter: blur(30px);
 }
 
 .bg-accent {
@@ -91,7 +97,6 @@ body {
   text-shadow: 0 0 8px currentColor;
 }
 
-
 svg {
   color: var(--text-color-accent) !important;
 }
@@ -156,4 +161,9 @@ h4,
 h5,
 h6 {
   color: var(--text-color-accent) !important;
+}
+
+.app-background {
+  background: url(https://w.wallhaven.cc/full/wy/wallhaven-wyzggx.png);
+  background-size: 100%;
 }
