@@ -1,6 +1,28 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
+import { motion } from "framer-motion";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils"; // Ensure this utility is present
+
+import {
+  Lightbulb,
+  Fan,
+  Thermometer,
+  Volume2,
+  Tv,
+  Blinds,
+  Book,
+  Shield,
+  Moon,
+  Clock,
+  Speaker,
+  Power,
+  Zap,
+} from "lucide-react";
+
+// Helper functions
 const getFanGlowColor = (speed) => {
   switch (speed) {
     case 1:
@@ -26,30 +48,15 @@ const getVolumeGlowColor = (volume) => {
   return "#ef4444";
 };
 
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import {
-  Lightbulb,
-  Fan,
-  Thermometer,
-  Cloud,
-  Volume2,
-  Tv,
-  Blinds,
-  Book,
-  Shield,
-  Moon,
-  Clock,
-  Speaker,
-  Power,
-  Zap,
-} from "lucide-react";
-
 const Bedroom = () => {
+  const [activeScene, setActiveScene] = useState("Bright");
+  const [fanSpeed, setFanSpeed] = useState(3);
+  const [volume, setVolume] = useState(60);
+
   const lightingScenes = [
     { name: "Bright", icon: <Lightbulb className="w-4 h-4" /> },
     { name: "Relax", icon: <Moon className="w-4 h-4" /> },
-    { name: "Reading", icon: <Book className="w-4 h-4" /> }, // Assuming Book icon is still needed
+    { name: "Reading", icon: <Book className="w-4 h-4" /> },
   ];
 
   const bedroomDevices = [
@@ -66,30 +73,43 @@ const Bedroom = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-primary rounded-3xl border border-stone-400 border-solid">
-      {/* Top bar (consistent) */}
+      {/* Top Bar */}
       <div className="flex justify-between items-center mb-6">
         <p className="text-sm text-muted">Bedroom - Thu, Jan 12</p>
-        <p className="text-sm text-muted">Temperature: 21°C, Humidity: 55%</p>
+        <p className="text-sm text-accent drop-shadow-md">🌡️ 21°C / 💧 55%</p>
       </div>
 
-      {/* Grid layout for Bedroom Dashboard */}
       <div className="grid grid-cols-4 gap-4">
-        {/* Main Lighting Control */}
+        {/* Main Lighting */}
         <Card className="col-span-2 text-muted">
           <CardHeader>
             <CardTitle className="text-sm font-medium">Main Lighting</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between mb-4">
-              <span className="text-4xl font-semibold text-primary">75%</span>
+              <span className="text-4xl font-semibold text-primary"></span>
               <Button variant="default" className="w-24">
                 <Power className="w-4 h-4 mr-2" /> On/Off
               </Button>
             </div>
-            <Progress value={75} className="h-4 bg-secondary mb-2" />
-            <div className="flex justify-between text-xs">
-              <span>Dimmer</span>
-              <span>Color Temp</span>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-xs text-primary">Dimmer</label>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                defaultValue={75}
+                className="w-full accent-[var(--accent-color)]"
+              />
+              <label className="text-xs text-primary">Color Temp</label>
+              <input
+                type="range"
+                min={1000}
+                max={6500}
+                defaultValue={3000}
+                className="w-full accent-[var(--accent-color)]"
+              />
             </div>
           </CardContent>
         </Card>
@@ -119,16 +139,24 @@ const Bedroom = () => {
         </Card>
 
         {/* Lighting Scenes */}
-        <Card className="col-span-1">
+        <Card className="col-span-1 text-muted">
           <CardHeader>
-            <CardTitle className="text-sm text-muted font-medium">Lighting Scenes</CardTitle>
+            <CardTitle className="text-sm font-medium">Lighting Scenes</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             {lightingScenes.map((scene, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-sm text-muted cursor-pointer">
+              <Button
+                key={idx}
+                variant={scene.name === activeScene ? "default" : "ghost"}
+                onClick={() => setActiveScene(scene.name)}
+                className={cn(
+                  "w-full flex justify-start gap-2 transition",
+                  scene.name === activeScene && "ring-2 ring-accent"
+                )}
+              >
                 {scene.icon}
                 {scene.name}
-              </div>
+              </Button>
             ))}
           </CardContent>
         </Card>
@@ -145,7 +173,11 @@ const Bedroom = () => {
             <Button variant="secondary" className="w-full">
               <Blinds className="w-4 h-4 mr-2" /> Close
             </Button>
-            <Progress value={50} className="h-2 bg-secondary mt-2" />
+            <Progress
+              value={50}
+              className="h-2 bg-secondary mt-2 transition-all duration-500"
+              style={{ boxShadow: "0 0 6px var(--accent-color)" }}
+            />
             <p className="text-xs text-center">50% Open</p>
           </CardContent>
         </Card>
@@ -157,25 +189,33 @@ const Bedroom = () => {
           </CardHeader>
           <CardContent className="space-y-2">
             {bedroomDevices.map((device, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-sm cursor-pointer">
+              <Button
+                key={idx}
+                variant="ghost"
+                className="w-full flex justify-start gap-2 hover:bg-accent/30 transition"
+              >
                 {device.icon}
                 {device.name}
-              </div>
+              </Button>
             ))}
           </CardContent>
         </Card>
 
-        {/* Quick Actions / Sleep Modes */}
+        {/* Quick Actions */}
         <Card className="col-span-1 text-muted">
           <CardHeader>
             <CardTitle className="text-sm font-medium">Quick Actions</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             {quickActions.map((action, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-sm cursor-pointer">
+              <Button
+                key={idx}
+                variant="ghost"
+                className="w-full flex justify-start gap-2 hover:bg-accent/30 transition"
+              >
                 {action.icon}
                 {action.name}
-              </div>
+              </Button>
             ))}
           </CardContent>
         </Card>
@@ -187,14 +227,32 @@ const Bedroom = () => {
           </CardHeader>
           <CardContent className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <Volume2 className="w-5 h-5 text-primary" />
-              <Progress value={60} className="h-2 w-3/4 bg-secondary" />
-              <span className="text-sm">60%</span>
+              <Volume2 className="w-5 h-5 text-primary animate-pulse" />
+              <Progress
+                value={volume}
+                className="h-2 w-3/4 bg-secondary"
+                style={{ boxShadow: `0 0 10px ${getVolumeGlowColor(volume)}` }}
+              />
+              <span className="text-sm">{volume}%</span>
             </div>
+            <input
+              type="range"
+              min={0}
+              max={100}
+              value={volume}
+              onChange={(e) => setVolume(Number(e.target.value))}
+              className="accent-[var(--accent-color)]"
+            />
             <div className="grid grid-cols-3 gap-2">
-              <Button variant="secondary">Play</Button>
-              <Button variant="secondary">Pause</Button>
-              <Button variant="secondary">Skip</Button>
+              {["Play", "Pause", "Skip"].map((label, idx) => (
+                <Button
+                  key={idx}
+                  variant="secondary"
+                  className="hover:scale-105 transition"
+                >
+                  {label}
+                </Button>
+              ))}
             </div>
           </CardContent>
         </Card>
