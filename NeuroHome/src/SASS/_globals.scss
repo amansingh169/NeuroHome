@@ -17,7 +17,6 @@ html {
 
 .bg-card {
   background-color: var(--card-bg) !important;
-  backdrop-filter: blur(30px);
 }
 
 .bg-accent {
@@ -166,4 +165,17 @@ h6 {
 .app-background {
   background: url(https://w.wallhaven.cc/full/wy/wallhaven-wyzggx.png);
   background-size: 100%;
+}
+
+.nav-link {
+  &.active {
+    color: white;
+    background-color: transparent !important;
+  }
+
+  &:hover,
+  &:focus {
+    color: white !important;
+    background-color: transparent !important;
+  }
 }

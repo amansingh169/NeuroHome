@@ -37,12 +37,7 @@ const Navbar = () => {
               ].map(({ path, label }) => (
                 <NavigationMenuItem key={path}>
                   <NavigationMenuLink asChild>
-                    <NavLink
-                      to={path}
-                      className={({ isActive }) =>
-                        isActive ? "text-white font-semibold" : "text-neutral-400"
-                      }
-                    >
+                    <NavLink to={path} className="nav-link text-neutral-400">
                       {label}
                     </NavLink>
                   </NavigationMenuLink>
